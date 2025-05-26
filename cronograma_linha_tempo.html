@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma Visual - Projeto Empreender para Transformar</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        .timeline-container {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #3498db;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 5px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid #3498db;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -12px;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .timeline-content h2 {
+            margin-top: 0;
+            color: #3498db;
+            font-size: 20px;
+        }
+        
+        .timeline-content .date {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-content ul {
+            margin: 10px 0 0;
+            padding-left: 20px;
+        }
+        
+        .timeline-content li {
+            margin-bottom: 5px;
+        }
+        
+        .timeline-content .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            margin-right: 5px;
+            border-radius: 3px;
+            font-size: 12px;
+            color: white;
+            margin-top: 5px;
+        }
+        
+        .tag.planejamento { background-color: #3498db; }
+        .tag.diagnostico { background-color: #9b59b6; }
+        .tag.formacao { background-color: #e74c3c; }
+        .tag.trilhas { background-color: #27ae60; }
+        .tag.desenvolvimento { background-color: #f39c12; }
+        .tag.eventos { background-color: #16a085; }
+        .tag.avaliacao { background-color: #c0392b; }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 15px;
+        }
+        
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+        
+        .milestone {
+            text-align: center;
+            padding: 15px;
+            margin: 30px 0;
+            background-color: #f1c40f;
+            color: #333;
+            border-radius: 6px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .left::after, .right::after {
+                left: 21px;
+            }
+            
+            .right {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Cronograma Visual - Projeto "Empreender para Transformar"</h1>
+    
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #3498db;"></div>
+            <span>Planejamento</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #9b59b6;"></div>
+            <span>Diagnóstico</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #e74c3c;"></div>
+            <span>Formação</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #27ae60;"></div>
+            <span>Trilhas Formativas</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #f39c12;"></div>
+            <span>Desenvolvimento</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #16a085;"></div>
+            <span>Eventos</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #c0392b;"></div>
+            <span>Avaliação</span>
+        </div>
+    </div>
+    
+    <div class="timeline-container">
+        <div class="timeline">
+            <!-- Mês 1 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="date">Mês 1</span>
+                    <h2>Planejamento Inicial</h2>
+                    <ul>
+                        <li>Mobilização inicial <span class="tag planejamento">Semana 1</span></li>
+                        <li>Formação do Comitê Técnico-Científico <span class="tag planejamento">Semana 2</span></li>
+                        <li>Mapeamento das 70 escolas participantes <span class="tag planejamento">Semanas 3-4</span></li>
+                    </ul>
+                    <p><strong>Responsáveis:</strong> Coordenação Geral, Equipe Pedagógica</p>
+                </div>
+            </div>
+            
+            <!-- Mês 2 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="date">Mês 2</span>
+                    <h2>Diagnóstico e Formação</h2>
+                    <ul>
+                        <li>Diagnóstico cognitivo e socioemocional <span class="tag diagnostico">Semanas 1-2</span></li>
+                        <li>Formação presencial de professores (20h) <span class="tag formacao">Semanas 3-4</span></li>
+                    </ul>
+                    <p><strong>Responsáveis:</strong> Equipe Pedagógica e Psicopedagógica, Formadores Especializados</p>
+                </div>
+            </div>
+            
+            <div class="milestone">
+                MARCO: Formação de Professores Concluída (Mês 2 - Semana 4)
+            </div>
+            
+            <!-- Mês 3 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="date">Mês 3</span>
+                    <h2>Início das Trilhas e Mentorias</h2>
+                    <ul>
+                        <li>Devolutiva do diagnóstico <span class="tag diagnostico">Semana 1</span></li>
+                        <li>Lançamento das trilhas online <span class="tag trilhas">Semana 2</span></li>
+                        <li>Início dos encontros semanais online <span class="tag trilhas">Semana 3</span></li>
+                        <li>Início das mentorias para professores <span class="tag desenvolvimento">Semana 2</span></li>
+                        <li>Início das mentorias para alunos <span class="tag desenvolvimento">Semana 3</span></li>
+                    </ul>
+                    <p><strong>Responsáveis:</strong> Equipe Psicopedagógica, Equipe de Tecnologia, Tutores, Mentores</p>
+                </div>
+            </div>
+            
+            <div class="milestone">
+                MARCO: Lançamento da Plataforma (Mês 3 - Semana 2)
+            </div>
+            
+            <!-- Mês 4 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="date">Mês 4</span>
+                    <h2>Desenvolvimento de Projetos</h2>
+                    <ul>
+                        <li>Continuação das trilhas formativas <span class="tag trilhas">Todo o mês</span></li>
+                        <li>Início dos desafios semanais <span class="tag desenvolvimento">Semana 1</span></li>
+                        <li>Workshop de comunicação <span class="tag trilhas">Semana 2</span></li>
+                        <li>Mentorias contínuas <span class="tag desenvolvimento">Todo o mês</span></li>
+                    </ul>
+                    <p><strong>Responsáveis:</strong> Tutores, Mentores, Especialistas Convidados</p>
+                </div>
+            </div>
+            
+            <!-- Mês 5 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="date">Mês 5</span>
+                    <h2>Primeira Feira e Projetos Macro</h2>
+                    <ul>
+                        <li>Início do desenvolvimento do projeto macro <span class="tag desenvolvimento">Semana 1</span></li>
+                        <li>Primeira feira escolar (orientação) <span class="tag eventos">Semana 2</span></li>
+                        <li>Continuação das trilhas e mentorias <span class="tag trilhas">Todo o mês</span></li>
+                    </ul>
+                    <p><strong>Responsáveis:</strong> Equipe Pedagógica, Professores, Alunos</p>
+                </div>
+            </div>
+            
+            <div class="milestone">
+                MARCO: Primeira Feira Escolar (Mês 5 - Semana 2)
+            </div>
+            
+            <!-- Mês 6 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="date">Mês 6</span>
+                    <h2>Desafio Intercolegial</h2>
+                    <ul>
+                        <li>Workshop de liderança <span class="tag trilhas">Semana 2</span></li>
+                        <li>Desafio gamificado intercolegial <span class="tag eventos">Semana 3</span></li>
+                        <li>Continuação do desenvolvimento de projetos <span class="tag desenvolvimento">Todo o mês</span></li>
+                    </ul>
+                    <p><strong>Responsáveis:</strong> Equipe de Gamificação, Especialistas, Professores</p>
+                </div>
+            </div>
+            
+            <div class="milestone">
+                MARCO: Desafio Intercolegial (Mês 6 - Semana 3)
+            </div>
+            
+            <!-- Mês 7 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="date">Mês 7</span>
+                    <h2>Finalização dos Desafios Semanais</h2>
+                    <ul>
+                        <li>Conclusão dos desafios semanais <span class="tag desenvolvimento">Semana 4</span></li>
+                        <li>Preparação para a segunda feira escolar <span class="tag eventos">Todo o mês</span></li>
+                        <li>Continuação das trilhas e mentorias <span class="tag trilhas">Todo o mês</span></li>
+                    </ul>
+                    <p><strong>Responsáveis:</strong> Professores, Alunos, Mentores</p>
+                </div>
+            </div>
+            
+            <!-- Mês 8 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="date">Mês 8</span>
+                    <h2>Segunda Feira Escolar</h2>
+                    <ul>
+                        <li>Segunda feira escolar - Hackathon <span class="tag eventos">Semana 1</span></li>
+                        <li>Segunda feira escolar - Banca <span class="tag eventos">Semana 2</span></li>
+                        <li>Seleção dos 20 projetos finalistas <span class="tag eventos">Semana 3</span></li>
+                        <li>Aplicação do questionário final <span class="tag avaliacao">Semana 4</span></li>
+                        <li>Finalização das trilhas formativas <span class="tag trilhas">Semana 4</span></li>
+                    </ul>
+                    <p><strong>Responsáveis:</strong> Equipe Técnica, Banca Avaliadora, Comitê Técnico-Científico</p>
+                </div>
+            </div>
+            
+            <div class="milestone">
+                MARCO: Segunda Feira Escolar (Mês 8 - Semanas 1-2)
+            </div>
+            
+            <!-- Mês 9 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="date">Mês 9</span>
+                    <h2>Avaliação e Premiação</h2>
+                    <ul>
+                        <li>Análise comparativa com diagnóstico <span class="tag avaliacao">Semana 1</span></li>
+                        <li>Evento de formatura e premiação <span class="tag avaliacao">Semana 2</span></li>
+                        <li>Anúncio dos 5 projetos selecionados <span class="tag avaliacao">Semana 2</span></li>
+                        <li>Início da mentoria estendida <span class="tag avaliacao">Semana 3</span></li>
+                    </ul>
+                    <p><strong>Responsáveis:</strong> Coordenação Geral, Equipe de Avaliação, Comitê e Patrocinadores</p>
+                </div>
+            </div>
+            
+            <div class="milestone">
+                MARCO: Evento de Premiação (Mês 9 - Semana 2)
+            </div>
+            
+            <!-- Meses 10-15 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="date">Meses 10-15</span>
+                    <h2>Mentoria Estendida</h2>
+                    <ul>
+                        <li>Mentoria estendida para os 5 projetos selecionados <span class="tag avaliacao">6 meses</span></li>
+                        <li>Entrega do portfólio final <span class="tag avaliacao">Mês 15 - Semana 4</span></li>
+                    </ul>
+                    <p><strong>Responsáveis:</strong> Mentores Especializados, Coordenação Geral</p>
+                </div>
+            </div>
+            
+            <div class="milestone">
+                MARCO: Conclusão do Projeto (Mês 15 - Semana 4)
+            </div>
+        </div>
+    </div>
+</body>
+</html>
